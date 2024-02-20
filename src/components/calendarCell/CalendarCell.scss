@@ -1,0 +1,58 @@
+@import "../../styles/variables.scss";
+
+.cell {
+  height: 75px;
+  width: calc(100% / 7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  & > div {
+    border: 1px solid $lightGray;
+    width: 90%;
+    height: 90%;
+    &.active {
+      background-color: #f9f9f9;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &.today {
+        border: 2px solid $green;
+      }
+
+      .banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        color: white;
+        font-size: 12px;
+        height: 20px;
+
+        &.shift {
+          background-color: $lightGray;
+          color: black;
+          font-size: 10px;
+        }
+
+        &.totalTime {
+          background-color: $green;
+        }
+
+        &.absent {
+          background-color: $red;
+        }
+
+        &.leave {
+          background-color: $orange;
+        }
+      }
+    }
+  }
+  .dateText {
+    text-align: right;
+    padding: 5px 5px;
+    color: $gray;
+  }
+}

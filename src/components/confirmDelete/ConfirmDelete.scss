@@ -1,0 +1,16 @@
+.confirmDelete {
+  background-color: white;
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 450px;
+  border-radius: 5px;
+
+  .button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+}

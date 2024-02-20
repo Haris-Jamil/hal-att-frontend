@@ -1,0 +1,28 @@
+@import "../../styles/variables.scss";
+
+.settings {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 25px 0px;
+  gap: 25px;
+
+  .container {
+    box-shadow: $boxShadow;
+    background-color: white;
+    width: 1400px;
+    padding: 20px;
+    border-radius: 15px;
+
+    .container-title {
+      margin-bottom: 20px;
+    }
+
+    .btnContainer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+}

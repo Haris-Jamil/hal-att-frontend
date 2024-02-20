@@ -1,0 +1,32 @@
+@import "../../styles//variables.scss";
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  .container {
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    box-shadow: $boxShadow;
+    border-top: 2px $darkBlue solid;
+
+    .menuItemContainer {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      &.active {
+        color: $darkBlue;
+      }
+      &:hover {
+        color: $darkBlue;
+      }
+    }
+  }
+}

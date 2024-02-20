@@ -1,0 +1,55 @@
+@import "../../styles/variables.scss";
+
+.userDetailBlock {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  & > .container {
+    display: flex;
+    flex-direction: column;
+    width: 180px !important;
+    background-color: $lightGray;
+    color: $lightBlack;
+    font-size: 14px;
+    border-radius: 10px;
+    box-shadow: $darkBoxShadow;
+    transition: 0.3s ease-in;
+    justify-content: space-between;
+
+    .detail {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 10px;
+
+      .department {
+        color: $gray;
+        font-size: 12px;
+      }
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      color: white;
+      height: 8px;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+
+      &.absent {
+        background-color: $red;
+      }
+
+      &.leave {
+        background-color: $orange;
+      }
+
+      &.time {
+        background-color: $green;
+        justify-content: space-around;
+      }
+    }
+  }
+}

@@ -1,0 +1,228 @@
+@import "../../styles/variables.scss";
+
+.monthView {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0px;
+
+  & > .container {
+    box-shadow: $boxShadow;
+    background-color: white;
+    width: 1400px;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .userSelectContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        flex: 1;
+        label {
+          font-weight: 500;
+        }
+        h3 {
+          font-weight: 500;
+        }
+        select {
+          border-radius: 5px;
+          padding: 5px 10px;
+          border: 1px solid $gray;
+          width: 150px;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      .monthChanger {
+        flex: 1.5;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        & > div {
+          width: 300px;
+          text-align: center;
+        }
+
+        .monthControl {
+          width: 300px;
+          text-align: center;
+          font-size: 25px;
+          color: gray;
+          display: flex;
+          align-items: center;
+          .caret {
+            font-size: 30px;
+            font-weight: 500;
+            cursor: pointer;
+          }
+          .month {
+            width: 220px;
+            b {
+              color: $lightBlack;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+
+    .calendar {
+      background-color: white;
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      border: 1px solid $lightGray;
+
+      .left {
+        background-color: $lightBlack;
+        height: 550px;
+        border-bottom-left-radius: 15px;
+        width: 240px;
+        padding: 10px;
+        box-shadow: $darkBoxShadow;
+
+        .userDetail {
+          border-bottom: 1px solid $lightGray;
+          padding: 20px 0px;
+          h3 {
+            font-size: 30px;
+            font-weight: 500;
+            color: white;
+          }
+          h2 {
+            color: $gray;
+            font-size: 17px;
+            font-weight: 100;
+          }
+        }
+
+        .attDetail {
+          padding-top: 20px;
+          color: $lightGray;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          div:first-child {
+            font-size: 20px;
+          }
+          .stat {
+            font-size: 15px;
+            font-weight: 100;
+          }
+        }
+      }
+
+      .right {
+        height: 550px;
+        border-bottom-right-radius: 15px;
+        width: calc(100% - 200px);
+        padding: 10px;
+
+        box-shadow: $darkBoxShadow;
+        & > .row {
+          display: flex;
+          gap: 10px;
+          margin-top: 10px;
+          &:first-of-type {
+            margin-top: 0px;
+          }
+          .day {
+            width: calc(100% / 7);
+            text-align: center;
+          }
+        }
+
+        .cellContainer {
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        div.loaderContainer {
+          display: flex;
+          height: 500px;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+.popUp {
+  width: 400px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  .popupContent {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 20px;
+      margin-left: 20px;
+      label {
+        cursor: pointer;
+        input {
+          margin-right: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+    .popupRow {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      .actions {
+        display: flex;
+        gap: 5px;
+        align-self: flex-end;
+        div {
+          cursor: pointer;
+          color: $gray;
+          &:hover {
+            color: $darkBlue;
+          }
+        }
+      }
+
+      .popupSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        input {
+          width: 80px;
+          height: 30px;
+          border: 1px solid $gray;
+          outline: none;
+          padding: 10px;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+
+    .absentDiv {
+      background-color: $red;
+    }
+
+    .leaveDiv {
+      background-color: $orange;
+    }
+  }
+}

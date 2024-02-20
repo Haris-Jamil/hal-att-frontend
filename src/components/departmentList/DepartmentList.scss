@@ -1,0 +1,23 @@
+@import "../../styles/variables.scss";
+
+.departmentList {
+  .iconContainer {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    .icon {
+      cursor: pointer;
+      &.iconDelete {
+        &:hover {
+          color: $red;
+        }
+      }
+      &.iconEdit {
+        &:hover {
+          color: $darkBlue;
+        }
+      }
+    }
+  }
+}

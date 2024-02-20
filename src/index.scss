@@ -1,0 +1,87 @@
+@import "./styles/variables.scss";
+* {
+  font-family: "Roboto", sans-serif;
+  margin: 0px;
+  padding: 0px;
+  font-weight: 400;
+  box-sizing: border-box;
+
+  body {
+    background-color: #eeede9;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.popup-overlay {
+  background-color: rgba($color: #000000, $alpha: 0.5);
+}
+
+.table {
+  width: 100%;
+  border: 1px solid $gray;
+  margin-top: 30px;
+  border-collapse: collapse;
+  tr {
+    border: 1px solid $gray;
+
+    &:nth-child(odd) {
+      background-color: $lightGray;
+    }
+
+    td {
+      border: 1px solid $gray;
+      padding: 10px;
+    }
+
+    th {
+      border: 1px solid $gray;
+      padding: 10px;
+      text-align: left;
+      font-weight: 500;
+      color: white;
+      background-color: $darkBlue;
+    }
+  }
+}
+
+button {
+  height: 28px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  border: 1px solid $lightGray;
+  cursor: pointer;
+  color: white;
+  transition: 0.2s ease-in;
+
+  &.green {
+    background-color: $green;
+    &:hover {
+      background-color: $darkGreen;
+    }
+  }
+
+  &.red {
+    background-color: $red;
+    &:hover {
+      background-color: $darkRed;
+    }
+  }
+}
+
+.formError {
+  color: $red;
+}
+
+.loader {
+  width: 50px;
+  align-self: center;
+}
+.loader-center {
+  margin-left: 50%;
+  margin-top: 20px;
+}
