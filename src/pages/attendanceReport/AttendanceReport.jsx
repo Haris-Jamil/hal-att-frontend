@@ -97,14 +97,26 @@ const AttendanceReport = () => {
                     }`}</td>
                     <td>
                       {r.timeIn && r.timeOut
-                        ? calculateDuration(r.timeIn, r.timeOut)
+                        ? calculateDuration(
+                            r.timeIn,
+                            r.timeOut,
+                            r.date,
+                            r.month,
+                            r.year
+                          )
                         : "--"}
                     </td>
                     <td>{`${currentUser.requiredHours}`}</td>
                     <td>
                       {r.timeIn && r.timeOut
                         ? calculateDiff(
-                            calculateDuration(r.timeIn, r.timeOut),
+                            calculateDuration(
+                              r.timeIn,
+                              r.timeOut,
+                              r.date,
+                              r.month,
+                              r.year
+                            ),
                             currentUser.requiredHours
                           )
                         : "--"}

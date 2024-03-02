@@ -2,6 +2,7 @@ import "./CalendarCell.scss";
 import { calculateDuration } from "../../utils";
 
 const CalendarCell = ({ data, onCellClick }) => {
+  console.log(data);
   return (
     <div className='cell' onClick={() => onCellClick(data)}>
       <div className={data ? "active " + (data.today ? "today" : "") : ""}>
@@ -20,7 +21,13 @@ const CalendarCell = ({ data, onCellClick }) => {
             {data.timeIn && data.timeOut && (
               <div className='banner totalTime'>
                 <span className='total'>
-                  {calculateDuration(data.timeIn, data.timeOut)}
+                  {calculateDuration(
+                    data.timeIn,
+                    data.timeOut,
+                    data.date,
+                    data.month,
+                    data.year
+                  )}
                 </span>
               </div>
             )}
