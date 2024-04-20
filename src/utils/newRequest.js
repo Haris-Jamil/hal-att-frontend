@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const newRequest = axios.create({
-  baseURL: "http://localhost:5001/api/",
+  baseURL: "https://hal-att-backend.vercel.app/api/",
   withCredentials: true,
 });
 

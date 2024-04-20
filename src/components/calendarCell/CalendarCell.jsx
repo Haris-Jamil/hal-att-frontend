@@ -2,7 +2,6 @@ import "./CalendarCell.scss";
 import { calculateDuration } from "../../utils";
 
 const CalendarCell = ({ data, onCellClick }) => {
-  console.log(data);
   return (
     <div className='cell' onClick={() => onCellClick(data)}>
       <div className={data ? "active " + (data.today ? "today" : "") : ""}>
