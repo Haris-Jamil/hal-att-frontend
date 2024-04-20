@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./AttendanceReport.scss";
 import newRequest from "../../utils/newRequest";
 import { calculateDuration, calculateDiff } from "../../utils.js";
+import moment from "moment";
+
 const AttendanceReport = () => {
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
@@ -9,6 +11,7 @@ const AttendanceReport = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [report, setReport] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [totalTime, setTotalTime] = useState("");
 
   const loadUsers = async () => {
     const resp = await newRequest.get("/user/all");
@@ -31,8 +34,52 @@ const AttendanceReport = () => {
     );
     setLoading(false);
     if (resp?.data?.data) {
-      setReport(resp.data.data);
+      let tempData = resp.data.data;
+      tempData = tempData.map((d) => {
+        let duration = "--";
+        let diff = "--";
+        if (d.timeIn && d.timeOut) {
+          duration = calculateDuration(
+            d.timeIn,
+            d.timeOut,
+            d.date,
+            d.month,
+            d.year
+          );
+          diff = calculateDiff(duration, currentUser.requiredHours);
+        }
+        return {
+          ...d,
+          duration,
+          diff,
+        };
+      });
+      setTotalTime(calculateTotalTime(tempData));
+      setReport(tempData);
     }
+  };
+
+  const calculateTotalTime = (data) => {
+    let totalDuration = moment.duration(0);
+    for (let d of data) {
+      if (d.diff.indexOf("-") === -1) {
+        const newDuration = moment.duration(d.diff);
+        totalDuration.add(newDuration);
+      } else {
+        const newDuration = moment.duration(d.diff.replace("-", ""));
+        totalDuration.subtract(newDuration);
+      }
+    }
+    let totalMinutes = totalDuration.asMinutes();
+    const isNegative = totalMinutes < 0;
+    totalMinutes = Math.abs(totalMinutes);
+
+    let hours = Math.floor(totalMinutes / 60)
+      .toString()
+      .padStart(2, "0");
+    let minutes = (totalMinutes % 60).toString().padStart(2, "0");
+
+    return `${isNegative ? "-" : ""}${hours}:${minutes}`;
   };
 
   const handleMonthChange = (e) => {
@@ -88,44 +135,39 @@ const AttendanceReport = () => {
 
           <tbody>
             {!loading ? (
-              report.map((r) => {
-                return (
-                  <tr key={r.date}>
-                    <td>{`${r.date}/${r.month}/${r.year}`}</td>
-                    <td>{`${r.timeIn ? r.timeIn : ""} - ${
-                      r.timeOut ? r.timeOut : ""
-                    }`}</td>
-                    <td>
-                      {r.timeIn && r.timeOut
-                        ? calculateDuration(
-                            r.timeIn,
-                            r.timeOut,
-                            r.date,
-                            r.month,
-                            r.year
-                          )
-                        : "--"}
-                    </td>
-                    <td>{`${currentUser.requiredHours}`}</td>
-                    <td>
-                      {r.timeIn && r.timeOut
-                        ? calculateDiff(
-                            calculateDuration(
-                              r.timeIn,
-                              r.timeOut,
-                              r.date,
-                              r.month,
-                              r.year
-                            ),
-                            currentUser.requiredHours
-                          )
-                        : "--"}
-                    </td>
-                    <td>{r.onLeave ? "yes" : "no"}</td>
-                    <td>{r.isAbsent ? "yes" : "no"}</td>
+              <>
+                {report.map((r) => {
+                  return (
+                    <tr key={r.date}>
+                      <td>{`${r.date}/${r.month}/${r.year}`}</td>
+                      <td>
+                        {`${r.timeIn ? r.timeIn : ""} - ${
+                          r.timeOut ? r.timeOut : ""
+                        }`}
+                      </td>
+                      <td>{r.duration}</td>
+                      <td>{`${currentUser.requiredHours}`}</td>
+                      <td>{r.diff} </td>
+                      <td>{r.onLeave ? "yes" : "no"}</td>
+                      <td>{r.isAbsent ? "yes" : "no"}</td>
+                    </tr>
+                  );
+                })}
+
+                {report.length ? (
+                  <tr style={{ backgroundColor: "#7bed9f" }}>
+                    <td>Total</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{totalTime}</td>
+                    <td></td>
+                    <td></td>
                   </tr>
-                );
-              })
+                ) : (
+                  ""
+                )}
+              </>
             ) : (
               <tr>
                 <td

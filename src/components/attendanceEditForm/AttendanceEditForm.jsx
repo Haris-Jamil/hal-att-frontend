@@ -17,6 +17,7 @@ const AttendanceEditForm = ({
   onSave,
 }) => {
   const [formData, setFormData] = useState(selectedDate);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     initInputMask();
@@ -49,7 +50,9 @@ const AttendanceEditForm = ({
         onSave();
       }
     } else {
+      setSaving(true);
       const resp = await newRequest.post("/attendance/add", formData);
+      setSaving(false);
       if (resp?.data?.success) {
         onSave();
       }
@@ -91,20 +94,26 @@ const AttendanceEditForm = ({
                 />
               </div>
               <div className='actions'>
-                <div>
-                  <RiCheckboxCircleLine size={28} onClick={save} />
-                </div>
-                <div>
-                  <RiCloseCircleLine
-                    size={28}
-                    onClick={() => {
-                      setEditMode(!editMode);
-                    }}
-                  />
-                </div>
-                <div>
-                  <RiDeleteBin2Line size={28} onClick={deleteAtt} />
-                </div>
+                {!saving ? (
+                  <>
+                    <div>
+                      <RiCheckboxCircleLine size={28} onClick={save} />
+                    </div>
+                    <div>
+                      <RiCloseCircleLine
+                        size={28}
+                        onClick={() => {
+                          setEditMode(!editMode);
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <RiDeleteBin2Line size={28} onClick={deleteAtt} />
+                    </div>
+                  </>
+                ) : (
+                  <img src='./loader.svg' className='small-loader' alt='' />
+                )}
               </div>
             </div>
             <div className='checkbox-row'>
